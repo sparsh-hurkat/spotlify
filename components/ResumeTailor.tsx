@@ -62,9 +62,9 @@ const ResumeTailor: React.FC<Props> = ({ knowledgeBase, state, setState }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-      {/* Left Column: Inputs */}
-      <div className="flex flex-col gap-4 overflow-y-auto pr-2">
+    <div className="flex flex-col gap-6 h-full">
+      {/* Inputs Section */}
+      <div className="flex flex-col gap-4 overflow-y-auto">
         <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 space-y-4">
           <h2 className="text-lg font-semibold mb-4 text-purple-400 flex items-center gap-2">
             Target Job & Resume
@@ -147,7 +147,7 @@ const ResumeTailor: React.FC<Props> = ({ knowledgeBase, state, setState }) => {
         </div>
       </div>
 
-      {/* Right Column: Analysis Results */}
+      {/* Analysis Results Section */}
       <div className="flex flex-col h-full min-h-[500px]">
         <div className="bg-slate-800 rounded-xl border border-slate-700 flex flex-col h-full overflow-hidden">
           <div className="p-4 border-b border-slate-700 bg-slate-800/50">

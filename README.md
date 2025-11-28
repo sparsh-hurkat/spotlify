@@ -9,8 +9,18 @@
 
 ## ✨ Features
 
+<div align="center">
+<img src="./public/ss3.png" alt="Screenshot 3" width="400" />
+</div>
+
 - 📝 **Resume Tailoring**: Get AI-powered analysis and suggestions to tailor your resume for specific job postings
+<div align="center">
+<img src="./public/ss1.png" alt="Screenshot 1" width="400" />
+</div>
 - 💌 **Cover Letter Generator**: Create personalized cover letters that highlight your relevant experience
+<div align="center">
+<img src="./public/ss2.png" alt="Screenshot 2" width="400" />
+</div>
 - 💬 **Question Assistant**: Get AI-generated answers to application questions using your experience database
 - 🧠 **Smart Knowledge Base**: Store and retrieve your career history, projects, and skills using vector embeddings
 - 🔍 **Semantic Search**: Find relevant experiences from your database using natural language queries
@@ -76,7 +86,3 @@ npm run preview
 ```
 
 ---
-
-**Built with ❤️ using AI Studio**
-
-View your app in AI Studio: https://ai.studio/apps/temp/4
