@@ -1,0 +1,4 @@
+{
+  "name": "JobAI - Intelligent Career Assistant",
+  "description": "A comprehensive React application powered by Gemini 2.5 Flash to tailor resumes, draft cover letters, and answer application questions using your personal context (Local RAG)."
+}
