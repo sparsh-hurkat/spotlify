@@ -19,6 +19,7 @@ const App = () => {
     setIsKBLoading(true);
     try {
       const data = await fetchKnowledgeBase();
+      console.log(data);
       setKnowledgeBase(data);
     } catch (e) {
       console.error("Failed to fetch knowledge base from DB", e);

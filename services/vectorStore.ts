@@ -183,35 +183,45 @@ export const fetchKnowledgeBase = async (): Promise<KnowledgeSnippet[]> => {
 
         // 2. Find header chunks (chunk_0)
         const headerIds = allIds.filter(id => id.endsWith('_chunk_0'));
-
         if (headerIds.length === 0) return [];
 
-        // 3. Fetch details for headers
-        const fetchResponse = await fetch(`${PINECONE_INDEX_URL}/vectors/fetch?ids=${headerIds.join(',')}`, {
-            method: 'GET',
-            headers: {
-                'Api-Key': PINECONE_API_KEY,
-                'X-Pinecone-API-Version': '2024-07'
-            }
-        });
-
-        if (!fetchResponse.ok) return [];
-
-        const fetchData = await fetchResponse.json();
+        // 3. Fetch details for headers (Pinecone expects POST body with ids array)
+        const chunkSize = 100;
         const snippets: KnowledgeSnippet[] = [];
 
-        Object.values(fetchData.vectors).forEach((vec: any) => {
-             const m = vec.metadata;
-             if (m) {
-                 snippets.push({
-                     id: m.sourceId,
-                     title: m.title,
-                     category: m.category,
-                     // Prefer fullContent if we stored it, fallback to chunk text
-                     content: m.fullContent || m.text 
-                 });
-             }
-        });
+        const buildQuery = (ids: string[]) =>
+            ids.map(id => `ids=${encodeURIComponent(id)}`).join('&');
+
+        for (let i = 0; i < headerIds.length; i += chunkSize) {
+            const batch = headerIds.slice(i, i + chunkSize);
+            const fetchResponse = await fetch(`${PINECONE_INDEX_URL}/vectors/fetch?${buildQuery(batch)}`, {
+                method: 'GET',
+                headers: {
+                    'Api-Key': PINECONE_API_KEY,
+                    'X-Pinecone-API-Version': '2024-07'
+                }
+            });
+
+            if (!fetchResponse.ok) {
+                console.error('Failed to fetch vector batch', await fetchResponse.text());
+                continue;
+            }
+
+            const fetchData = await fetchResponse.json();
+
+            Object.values(fetchData.vectors || {}).forEach((vec: any) => {
+                 const m = vec.metadata;
+                 if (m) {
+                     snippets.push({
+                         id: m.sourceId,
+                         title: m.title,
+                         category: m.category,
+                         // Prefer fullContent if we stored it, fallback to chunk text
+                         content: m.fullContent || m.text 
+                     });
+                 }
+            });
+        }
 
         return snippets;
     } catch (error) {
