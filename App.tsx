@@ -171,7 +171,7 @@ const App = () => {
         <div className="p-6 border-b border-slate-800">
           <div className="flex items-center gap-2">
             <img 
-              src="./logo1.png" 
+              src="./public/logo1.png" 
               alt="Spotlify Logo" 
               className="w-8 h-8 object-contain"
             />
